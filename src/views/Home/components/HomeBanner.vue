@@ -1,13 +1,15 @@
 <script setup>
-import { getBanner } from '@/apis/layout'
-import { onMounted, ref } from 'vue';
-const bannerList = ref([])
+// import { getBanner } from '@/apis/layout'
+// import { onMounted, ref } from 'vue';
+// const bannerList = ref([])
 
-onMounted(async () => {
-    const res = await getBanner()
-    bannerList.value = res.data.result
-    // console.log(res.data);
-})
+// onMounted(async () => {
+//     const res = await getBanner()
+//     bannerList.value = res.data.result
+//     // console.log(res.data);
+// })
+import {useBanner} from '@/views/Category/composables/useBanner'
+const {bannerList} = useBanner()
 </script>
 
 <template>

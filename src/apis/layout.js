@@ -31,5 +31,18 @@ export const findNewAPI = () => {
  * @return {*}
  */
 export const getHotAPI = () => {
-    return  instance({url: 'home/hot'})
-  }
+    return instance({ url: 'home/hot' })
+}
+
+
+
+/**
+* @description: 获取所有商品模块
+* @param {*}
+* @return {*}
+*/
+export const getGoodsAPI = () => {
+    return instance({
+        url: '/home/goods'
+    })
+}
