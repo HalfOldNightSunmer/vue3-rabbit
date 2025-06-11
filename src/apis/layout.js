@@ -46,3 +46,20 @@ export const getGoodsAPI = () => {
         url: '/home/goods'
     })
 }
+
+
+
+
+/**
+ * 
+ * @param {获取详情} id 
+ * @returns 
+ */
+export const getDetail = (id) => {
+  return instance({
+    url: '/goods',
+    params: {
+      id
+    }
+  })
+}

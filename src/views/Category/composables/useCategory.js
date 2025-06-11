@@ -8,7 +8,7 @@ export const useCategory = () => {
     const getCategory = async (id) => {
         const res = await getTopCategoryAPI(id)
         categoryData.value = res.data.result
-        console.log(res.data.result)
+        // console.log(res.data.result)
     }
     getCategory(route.params.id)
 

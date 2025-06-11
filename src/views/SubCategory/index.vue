@@ -26,13 +26,13 @@ const getCategoryFilter = async () => {
 }
 
 const handleClick =((tab, event) => {
-  console.log(tab, event)
+  // console.log(tab, event)
   reqData.value.page = 1
   getSubCategory()
 }) 
 
 const load = async () => {
-  console.log('到底了')
+  // console.log('到底了')
   reqData.value.page ++
   const res = await getSubCategoryAPI(reqData.value)
   goodList.value.push(...res.data.result.items)
