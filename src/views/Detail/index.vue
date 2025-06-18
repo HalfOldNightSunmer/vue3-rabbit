@@ -1,6 +1,7 @@
 <script setup>
 import DetailHot from './components/DetailHot.vue'
-import ImageView from '@/composables/ImageView/index.vue'
+// import ImageView from '@/composables/ImageView/index.vue'
+// import XtxSku from '@/composables/XtxSku/index.vue'
 import { getDetail } from '@/apis/layout'
 import { onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
@@ -77,7 +78,7 @@ const addCart = () => {
           <div class="goods-info">
             <div class="media">
               <!-- 图片预览区 -->
-               <ImageView></ImageView>
+               <XtxImageView></XtxImageView>
               <!-- <XtxImageView :image-list="goods.mainPictures" /> -->
                <!-- <img src="http://yjy-xiaotuxian-dev.oss-cn-beijing.aliyuncs.com/picture/2021-04-05/6fdcac19-dd44-442c-9212-f7ec3cf3ed18.jpg"/> -->
               <!-- 统计数量 -->
