@@ -1,10 +1,12 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { loginAPI } from '@/apis/login'
+// import { loginAPI } from '@/apis/login'
+import { useUserStore } from '@/stores/user'
 import { ElMessage } from 'element-plus'
 
 const router = useRouter()
+const userStore = useUserStore()
 const loginFormRef = ref(null)
 
 const userInfo = ref({
@@ -26,9 +28,10 @@ const submitForm = (loginFormRef) => {
   const  {username: account, password} = userInfo.value
   loginFormRef.validate( async (valid, fields) => {
     if (valid) {
-      const res = await loginAPI( {account, password})
-      console.log('登录成功', res.data)
-      if ( res.data.code === '1') {
+      // const res = await loginAPI( {account, password})
+      await userStore.getUserInfo( {account, password})
+      console.log('登录成功', userStore.userInfo)
+      if ( userStore.userInfo.code === '1') {
         ElMessage({
           message: '登录成功',
           type: 'success'

@@ -1,5 +1,7 @@
 import axios from 'axios';
 import { ElMessage } from 'element-plus'
+import { useUserStore } from '@/stores/user';
+import { useRouter } from 'vue-router';
 
 const instance = axios.create({
     baseURL: 'http://pcapi-xiaotuxian-front-devtest.itheima.net',
@@ -7,9 +9,16 @@ const instance = axios.create({
     // headers: {'X-Custom-Header': 'foobar'}
 })
 
+
+
 // 添加请求拦截器
 instance.interceptors.request.use(function (config) {
-    // 在发送请求之前做些什么
+    // 请求携带token
+    const useUser = useUserStore()
+    const token = useUser.userInfo?.result?.token
+    if (token) {
+        config.headers.Authorization = `Bearer ${token}`
+    }
     return config;
 }, function (error) {
     // 对请求错误做些什么
@@ -28,6 +37,13 @@ instance.interceptors.response.use(function (response) {
         message: error.response.data.message,
         type: 'error'
     })
+    // 登录过期判断
+    if (error.response.status = 401) {
+        const useUser = useUserStore()
+        const router = useRouter()
+        useUser.clearUserInfo()
+        router.replace("/login")
+    }
     return Promise.reject(error);
 })
 // )

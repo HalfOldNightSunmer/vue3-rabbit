@@ -1,6 +1,18 @@
 <script setup>
 import { useRouter } from 'vue-router'
+import { computed } from 'vue'
 const router = useRouter()
+import { useUserStore } from '@/stores/user'
+const userStore = useUserStore()
+// const isLogin = userStore.userInfo?.token || false
+const isLogin =  Boolean(userStore.userInfo?.result.token)
+
+
+const logout = () => {
+  userStore.clearUserInfo()
+  router.replace('/login')
+}
+
 
 </script>
 
@@ -9,10 +21,10 @@ const router = useRouter()
     <div class="container">
       <ul>
         <!-- 多模版渲染 区分登录状态和费登录状态 -->
-        <template v-if="false">
-          <li><a href="javascript:;"><i class="iconfont icon-user"></i>周杰伦</a></li>
+        <template v-if="isLogin">
+          <li><a href="javascript:;"><i class="iconfont icon-user"></i>{{ userStore.userInfo?.result.nickname }}</a></li>
           <li>
-            <el-popconfirm title="确认退出吗?" confirm-button-text="确认" cancel-button-text="取消">
+            <el-popconfirm @confirm="logout" title="确认退出吗?" confirm-button-text="确认" cancel-button-text="取消">
               <template #reference>
                 <a href="javascript:;">退出登录</a>
               </template>
