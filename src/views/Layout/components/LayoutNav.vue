@@ -3,12 +3,16 @@ import { useRouter } from 'vue-router'
 import { computed } from 'vue'
 const router = useRouter()
 import { useUserStore } from '@/stores/user'
+import { useCartStore } from '@/stores/cartStore'
+
 const userStore = useUserStore()
+const cartStore = useCartStore()
 // const isLogin = userStore.userInfo?.token || false
-const isLogin =  Boolean(userStore.userInfo?.result.token)
+const isLogin =  Boolean(userStore.userInfo?.result?.token)
 
 
-const logout = () => {
+const logout = async() => {
+  await cartStore.clearCart()
   userStore.clearUserInfo()
   router.replace('/login')
 }
@@ -22,7 +26,7 @@ const logout = () => {
       <ul>
         <!-- 多模版渲染 区分登录状态和费登录状态 -->
         <template v-if="isLogin">
-          <li><a href="javascript:;"><i class="iconfont icon-user"></i>{{ userStore.userInfo?.result.nickname }}</a></li>
+          <li><a href="javascript:;"><i class="iconfont icon-user"></i>{{ userStore.userInfo?.result?.nickname }}</a></li>
           <li>
             <el-popconfirm @confirm="logout" title="确认退出吗?" confirm-button-text="确认" cancel-button-text="取消">
               <template #reference>

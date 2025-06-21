@@ -6,8 +6,8 @@ import { getDetail } from '@/apis/layout'
 import { onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { ElMessage } from 'element-plus'
-// import { useCartStore } from '@/stores/cartStore'
-// const cartStore = useCartStore()
+import { useCartStore } from '@/stores/cartStore'
+const cartStore = useCartStore()
 const goods = ref({})
 const route = useRoute()
 const getGoods = async () => {
@@ -32,18 +32,18 @@ const countChange = (count) => {
 // 添加购物车
 const addCart = () => {
   if (skuObj.skuId) {
-    // console.log(skuObj, cartStore.addCart)
+    console.log(skuObj)
     // 规则已经选择  触发action
-    // cartStore.addCart({
-    //   id: goods.value.id,
-    //   name: goods.value.name,
-    //   picture: goods.value.mainPictures[0],
-    //   price: goods.value.price,
-    //   count: count.value,
-    //   skuId: skuObj.skuId,
-    //   attrsText: skuObj.specsText,
-    //   selected: true
-    // })
+    cartStore.addCart({
+      id: goods.value.id,
+      name: goods.value.name,
+      picture: goods.value.mainPictures[0],
+      price: goods.value.price,
+      count: count.value,
+      skuId: skuObj.skuId,
+      attrsText: skuObj.specsText,
+      selected: true
+    })
   } else {
     // 规格没有选择 提示用户
     ElMessage.warning('请选择规格')

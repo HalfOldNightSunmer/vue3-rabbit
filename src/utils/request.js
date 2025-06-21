@@ -38,11 +38,11 @@ instance.interceptors.response.use(function (response) {
         type: 'error'
     })
     // 登录过期判断
-    if (error.response.status = 401) {
+    if (error.response.status === 401) {
         const useUser = useUserStore()
         const router = useRouter()
         useUser.clearUserInfo()
-        router.replace("/login")
+        router.replace('/login')
     }
     return Promise.reject(error);
 })

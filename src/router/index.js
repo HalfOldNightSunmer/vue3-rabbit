@@ -6,6 +6,10 @@ import Layout from '../views/Layout/index.vue'
 import Category from '../views/Category/index.vue'
 import SubCategory from '../views/SubCategory/index.vue'
 import Detail from '../views/Detail/index.vue'
+import CartList from '../views/CartList/index.vue'
+import Order from '@/views/CartList/components/order.vue'
+import Pay from '@/views/CartList/components/pay.vue'
+import Paycallback from '@/views/CartList/components/paycallback.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -31,6 +35,26 @@ const router = createRouter({
           path: 'detail/:id',
           name: 'detail',
           component: Detail
+        },
+        {
+          path: 'cartList',
+          name: 'cartList',
+          component: CartList
+        },
+        {
+          path: 'order',
+          name: 'order',
+          component: Order
+        },
+        {
+          path: 'pay/:id',
+          name: 'pay',
+          component: Pay
+        },
+        {
+          path: 'paycallback',
+          name: 'paycallback',
+          component: Paycallback
         }
       ]
     },

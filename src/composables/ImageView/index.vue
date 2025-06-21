@@ -26,7 +26,7 @@ watch([elementX, elementY, isOutside], () => {
     if  (isOutside.value) {
       return
     }
-    console.log(elementX.value, elementY.value, isOutside.value);
+    // console.log(elementX.value, elementY.value, isOutside.value);
     
     // 处理可移动区域
     if (elementX.value > 100 && elementX.value < 300) {

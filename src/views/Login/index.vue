@@ -4,6 +4,8 @@ import { useRouter } from 'vue-router'
 // import { loginAPI } from '@/apis/login'
 import { useUserStore } from '@/stores/user'
 import { ElMessage } from 'element-plus'
+import { mergeCartAPI} from '@/apis/cart'
+import { useCartStore } from '@/stores/cartStore'
 
 const router = useRouter()
 const userStore = useUserStore()
@@ -31,6 +33,16 @@ const submitForm = (loginFormRef) => {
       // const res = await loginAPI( {account, password})
       await userStore.getUserInfo( {account, password})
       console.log('登录成功', userStore.userInfo)
+      // 合并购物车
+      const useCart = useCartStore()
+      const localCart = useCart.cartList.map(item => {
+        return {
+          skuId: item.skuId,
+          selected: item.selected,
+          count: item.count
+        }
+      })
+      await mergeCartAPI(localCart)
       if ( userStore.userInfo.code === '1') {
         ElMessage({
           message: '登录成功',
